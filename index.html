@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>jQuery POS by ericuldall</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>jQuery POS</h1>
+        <h2>Bringing point of sale to the cloud</h2>
+        <a href="https://github.com/ericuldall/jquery-pos" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="jquery-pos-v001-beta" class="anchor" href="#jquery-pos-v001-beta"><span class="octicon octicon-link"></span></a>jquery-pos v0.0.1 <em>Beta</em>
+</h1>
+
+<p>Point of sale hardware support plugin for jQuery</p>
+
+<p>I have currently only tested this plugin on 1 type of barcode scanner and credit card magnetc stripe reader. However, so far tests have been very successful and promising.
+Any code contributions are much appreciated as I'm sure we can develop more extensive Regexp options that span accross different barcode types and other forms of CC Data.</p>
+
+<h1>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>Simply include <em>jquery.pos.js</em> on your site then use the following code block:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">pos</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'scan.pos.barcode'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+        <span class="c1">//access `event.code` - barcode data</span>
+    <span class="p">});</span>
+    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="nx">swipe</span><span class="p">.</span><span class="nx">pos</span><span class="p">.</span><span class="nx">card</span><span class="err">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+        <span class="c1">//access following:</span>
+        <span class="c1">// `event.card_number` - card number only</span>
+        <span class="c1">// `event.card_holder_first_name` - card holder first name only</span>
+        <span class="c1">// `event.card_holder_last_name` - card holder last name only</span>
+        <span class="c1">// `event.card_exp_date_month` - card expiration month - 2 digits</span>
+        <span class="c1">// `event.card_exp_date_year_2` - card expiration year - 2 digits</span>
+        <span class="c1">// `event.card_exp_date_year_4` - card expiration year - 4 digits</span>
+        <span class="c1">// `event.swipe_data` - original swipe data from raw processing or sending to a 3rd party service</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>You can also override the following default options...</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">scan</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">//enable scan event</span>
+    <span class="nx">swipe</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">//enable swipe event</span>
+    <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">scan</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">barcode</span><span class="o">:</span> <span class="s1">'scan.pos.barcode'</span> <span class="c1">//event name for successfully scanned barcode</span>
+    <span class="p">},</span>
+    <span class="nx">swipe</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">card</span><span class="o">:</span> <span class="s1">'swipe.pos.card'</span> <span class="c1">//event name for successfully scanned card</span>
+    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">regexp</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">scan</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">barcode</span><span class="o">:</span> <span class="s1">'\\d+'</span> <span class="c1">//regexp for barcode validation</span>
+    <span class="p">},</span>
+    <span class="nx">swipe</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">card</span><span class="o">:</span> <span class="s1">'\\%B(\\d+)\\^(\\w+)\\/(\\w+)\\^\\d+\\?;\\d+=(\\d\\d)(\\d\\d)\\d+\\?'</span> <span class="c1">//regexp for credit card validation</span>
+    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">prefix</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">scan</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">barcode</span><span class="o">:</span> <span class="s1">''</span> <span class="c1">//prefix for barcode - will be added to regexp</span>
+    <span class="p">},</span>
+    <span class="nx">swipe</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">card</span><span class="o">:</span> <span class="s1">''</span> <span class="c1">//prefix for credit card - will be added to regexp</span>
+    <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">pos</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/ericuldall/jquery-pos/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/ericuldall/jquery-pos/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/ericuldall/jquery-pos"></a> is maintained by <a href="https://github.com/ericuldall">ericuldall</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
