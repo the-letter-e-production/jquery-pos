@@ -1,4 +1,4 @@
 jquery-pos
 ==========
 
-jQuery POS
+Point of sale hardware support plugin for jQuery
