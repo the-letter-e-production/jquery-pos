@@ -1,7 +1,12 @@
-jquery-pos
-==========
+jquery-pos v0.0.1 _Beta_
+========================
 
 Point of sale hardware support plugin for jQuery
+
+I have currently only tested this plugin on 1 type of barcode scanner and credit card magnetc stripe reader. However, so far tests have been very successful and promising.
+Any code contributions are much appreciated as I'm sure we can develop more extensive Regexp options that span accross different barcode types and other forms of CC Data.
+
+#Usage
 
 Simply include _jquery.pos.js_ on your site then use the following code block:
 ```javascript
