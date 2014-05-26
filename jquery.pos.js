@@ -3,14 +3,14 @@
     $.fn.pos = function(options) {
         //define instance for use in child functions
         var $this = $(this);
+	var data = {
+		scan: '',
+		swipe: ''
+	};
         //set default options
         defaults = {
             scan: true,
             swipe: true,
-            data: {
-                scan: '',
-                swipe: ''
-            },
             events: {
                 scan: {
                     barcode: 'scan.pos.barcode'
@@ -46,23 +46,22 @@
                     if (defaults.data.scan.match(scanexp)) {
                         $this.trigger({
                             type: $this.options.events.scan.barcode,
-                            code: defaults.data.scan,
+                            code: data.scan,
                             time: new Date()
                         });
                     }
-
-                    defaults.data.scan = '';
+                    data.scan = '';
                 } else {
                     var char = String.fromCharCode(event.which);
-                    defaults.data.scan += char;
+                    data.scan += char;
                 }
             }
 
             if ($this.options.swipe) {
                 if (event.which == 13) {
-                    var swipexp = new RegExp('^' + $this.options.regexp.swipe.card + '$');
-                    if (defaults.data.swipe.match(swipexp)) {
-                        var swipe_match = swipexp.exec(defaults.data.swipe);
+                    var swipexp = new RegExp('^' + $this.options.prefix.swipe.card + $this.options.regexp.swipe.card + '$');
+                    if (data.swipe.match(swipexp)) {
+                        var swipe_match = swipexp.exec(data.swipe);
                         var date = new Date();
                         var year = date.getFullYear();
                         year = year.toString().substring(0, 2) + swipe_match[4];
@@ -78,10 +77,10 @@
                             time: date
                         });
                     }
-                    defaults.data.swipe = '';
+                    data.swipe = '';
                 } else {
                     var char = String.fromCharCode(event.which);
-                    defaults.data.swipe += char.replace(/ /g, '');
+                    data.swipe += char.replace(/ /g, '');
                 }
             }
         });
