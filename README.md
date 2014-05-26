@@ -4,7 +4,7 @@ jquery-pos
 Point of sale hardware support plugin for jQuery
 
 Simply include _jquery.pos.js_ on your site then use the following code block:
-```javsacript
+```javascript
 $(function(){
 	$(document).pos();
 	$(document).on('scan.pos.barcode', function(event){
