@@ -43,7 +43,7 @@
             if ($this.options.scan) {
                 if (event.which == 13) {
                     var scanexp = new RegExp('^' + $this.options.prefix.scan.barcode + $this.options.regexp.scan.barcode + '$');
-                    if (defaults.data.scan.match(scanexp)) {
+                    if (data.scan.match(scanexp)) {
                         $this.trigger({
                             type: $this.options.events.scan.barcode,
                             code: data.scan,
