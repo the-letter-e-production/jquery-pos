@@ -15,7 +15,7 @@ $(function(){
 	$(document).on('scan.pos.barcode', function(event){
 		//access `event.code` - barcode data
 	});
-	$(document).on(swipe.pos.card', function(event){
+	$(document).on('swipe.pos.card', function(event){
 		//access following:
 		// `event.card_number` - card number only
 		// `event.card_holder_first_name` - card holder first name only
