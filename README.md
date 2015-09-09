@@ -6,6 +6,8 @@ Point of sale hardware support plugin for jQuery
 I have currently only tested this plugin on 1 type of barcode scanner and credit card magnetc stripe reader. However, so far tests have been very successful and promising.
 Any code contributions are much appreciated as I'm sure we can develop more extensive Regexp options that span accross different barcode types and other forms of CC Data.
 
+Here's a blog post containing some basic info and caveats about the plugin: http://www.devlifeline.com/2014/05/using-point-of-sale-hardware-in-cloud.html
+
 #Usage
 
 Simply include _jquery.pos.js_ on your site then use the following code block:
