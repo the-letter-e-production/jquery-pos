@@ -44,7 +44,7 @@
         $this.keypress(function(event) {
             if ($this.options.scan) {
                 if (event.which == 13) {
-                    if( !submit_on_scan ){
+                    if( !$this.options.submit_on_scan ){
 			event.preventDefault();
 		    }
                     var scanexp = new RegExp('^' + $this.options.prefix.scan.barcode + $this.options.regexp.scan.barcode + '$');
@@ -64,7 +64,7 @@
 
             if ($this.options.swipe) {
                 if (event.which == 13) {
-		    if( !submit_on_swipe ){
+		    if( !$this.options.submit_on_swipe ){
                     	event.preventDefault();
 		    }
                     var swipexp = new RegExp('^' + $this.options.prefix.swipe.card + $this.options.regexp.swipe.card + '$');
