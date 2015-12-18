@@ -35,30 +35,32 @@ You can also override the following default options...
 ```javascript
 var options = {
     scan: true, //enable scan event
+    submit_on_scan: false, //allow the keycode 13 event to continue on scan
     swipe: true, //enable swipe event
+    submit_on_swipe: false, //allow the keycode 13 event to continue on swipe
     events: {
-	scan: {
-	    barcode: 'scan.pos.barcode' //event name for successfully scanned barcode
-	},
-	swipe: {
-	    card: 'swipe.pos.card' //event name for successfully scanned card
-	}
+        scan: {
+            barcode: 'scan.pos.barcode' //event name for successfully scanned barcode
+        },
+        swipe: {
+            card: 'swipe.pos.card' //event name for successfully scanned card
+        }
     },
     regexp: {
-	scan: {
-	    barcode: '\\d+' //regexp for barcode validation
-	},
-	swipe: {
-	    card: '\\%B(\\d+)\\^(\\w+)\\/(\\w+)\\^\\d+\\?;\\d+=(\\d\\d)(\\d\\d)\\d+\\?' //regexp for credit card validation
-	}
+        scan: {
+            barcode: '\\d+' //regexp for barcode validation
+        },
+        swipe: {
+            card: '\\%B(\\d+)\\^(\\w+)\\/(\\w+)\\^\\d+\\?;\\d+=(\\d\\d)(\\d\\d)\\d+\\?' //regexp for credit card validation
+        }
     },
     prefix: {
-	scan: {
-	    barcode: '' //prefix for barcode - will be added to regexp
-	},
-	swipe: {
-	    card: '' //prefix for credit card - will be added to regexp
-	}
+        scan: {
+            barcode: '' //prefix for barcode - will be added to regexp
+        },
+        swipe: {
+            card: '' //prefix for credit card - will be added to regexp
+        }
     }
 };
 
