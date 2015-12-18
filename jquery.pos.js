@@ -10,7 +10,9 @@
         //set default options
         defaults = {
             scan: true,
+	    submit_on_scan: false,
             swipe: true,
+	    submit_on_swipe: false,
             events: {
                 scan: {
                     barcode: 'scan.pos.barcode'
@@ -42,7 +44,9 @@
         $this.keypress(function(event) {
             if ($this.options.scan) {
                 if (event.which == 13) {
-                    event.preventDefault();
+                    if( !submit_on_scan ){
+			event.preventDefault();
+		    }
                     var scanexp = new RegExp('^' + $this.options.prefix.scan.barcode + $this.options.regexp.scan.barcode + '$');
                     if (data.scan.match(scanexp)) {
                         $this.trigger({
@@ -60,7 +64,9 @@
 
             if ($this.options.swipe) {
                 if (event.which == 13) {
-                    event.preventDefault();
+		    if( !submit_on_swipe ){
+                    	event.preventDefault();
+		    }
                     var swipexp = new RegExp('^' + $this.options.prefix.swipe.card + $this.options.regexp.swipe.card + '$');
                     if (data.swipe.match(swipexp)) {
                         var swipe_match = swipexp.exec(data.swipe);
